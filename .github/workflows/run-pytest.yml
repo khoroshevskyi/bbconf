@@ -34,6 +34,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'  # caching can speed up the workflow by reusing the installed dependencies
+        cache-dependency-path: "${{ github.action_path }}/requirements/requirements-all.txt"
 
     - name: Install dev dependencies
       run: if [ -f requirements/requirements-dev.txt ]; then pip install -r requirements/requirements-dev.txt; fi
