@@ -31,9 +31,9 @@ jobs:
     
     - name: Hack setup-python cache
 
-    if: hashFiles('**/requirements.txt', '**/pyproject.toml') == ''
-    run: |
-      touch ./requirements.txt
+      if: hashFiles('**/requirements.txt', '**/pyproject.toml') == ''
+      run: |
+        touch ./requirements.txt
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
