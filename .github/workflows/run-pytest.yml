@@ -31,9 +31,9 @@ jobs:
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
-      cache: 'pip' 
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'  # caching can speed up the workflow by reusing the installed dependencies
 
     - name: Install dev dependencies
       run: if [ -f requirements/requirements-dev.txt ]; then pip install -r requirements/requirements-dev.txt; fi
