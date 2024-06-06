@@ -28,13 +28,19 @@ jobs:
           options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
     - uses: actions/checkout@v4
+    
+    - name: Hack setup-python cache
+
+    if: hashFiles('**/requirements.txt', '**/pyproject.toml') == ''
+    run: |
+      touch ./requirements.txt
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
         cache: 'pip'  # caching can speed up the workflow by reusing the installed dependencies
-        cache-dependency-path: "${{ github.action_path }}/requirements/requirements-all.txt"
+        # cache-dependency-path: "${{ github.action_path }}/requirements/requirements-all.txt"
 
     - name: Install dev dependencies
       run: if [ -f requirements/requirements-dev.txt ]; then pip install -r requirements/requirements-dev.txt; fi
